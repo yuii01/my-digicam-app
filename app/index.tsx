@@ -2,10 +2,9 @@ import {
   CameraMode,
   CameraType,
   CameraView,
-  useCameraPermissions,
+  useCameraPermissions
 } from "expo-camera";
 
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -20,7 +19,15 @@ import {
 
 import { useRef, useState } from "react";
 
+
+// import { createTamagui, TamaguiProvider, Button as TButton } from 'tamagui';
+// import fileconfig from '../tamagui.config';
+
+
 export default function App() {
+  // const config = createTamagui(fileconfig)
+
+
   const [permission, requestPermission] = useCameraPermissions();
   const ref = useRef<CameraView>(null);
   const [mode, setMode] = useState<CameraMode>("picture");
@@ -67,6 +74,8 @@ export default function App() {
   };
 
   return (
+    // <TamaguiProvider config={config}>
+
     <SafeAreaView style={styles.container}>
       <View style={styles.cameraWrapper}>
         <CameraView
@@ -80,11 +89,12 @@ export default function App() {
           <View style={styles.shutterContainer}>
             <Pressable onPress={toggleMode}>
               {mode === "picture" ? (
-                <AntDesign name="picture" size={32} color="white" />
+                <Feather name="video-off" size={32} color="white" />
               ) : (
                 <Feather name="video" size={32} color="white" />
               )}
             </Pressable>
+
             <Pressable onPress={mode === "picture" ? takePicture : recordVideo}>
               {({ pressed }) => (
                 <View
@@ -95,6 +105,7 @@ export default function App() {
                     },
                   ]}
                 >
+
                   <View
                     style={[
                       styles.shutterBtnInner,
@@ -105,10 +116,13 @@ export default function App() {
                   />
                 </View>
               )}
+
             </Pressable>
+
             <Pressable onPress={toggleFacing}>
               <FontAwesome6 name="rotate-left" size={32} color="white" />
             </Pressable>
+            
           </View>
         </CameraView>
       </View>
@@ -120,17 +134,20 @@ export default function App() {
       </View>
 
       <View style={styles.navigationContainer}>
-        <Text style={{ color: "white", textAlign: "center" }}>Add gallery, journal</Text>
+        <Feather name="image" size={32} color="white"/>
+        <Feather name="book" size={32} color="white"/>
       </View>
 
     </SafeAreaView>
+
+    //</TamaguiProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: "#000",       
   },
   cameraWrapper: {
     width: "100%",
@@ -185,5 +202,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 12,
     marginHorizontal: 16,
+    flexDirection: "row",
   }
 });
