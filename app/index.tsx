@@ -120,7 +120,7 @@ export default function App() {
       </View>
 
       <View style={styles.navigationContainer}>
-        <Text style={{ color: "white", textAlign: "center" }}>Filters go here</Text>
+        <Text style={{ color: "white", textAlign: "center" }}>Add gallery, journal</Text>
       </View>
 
     </SafeAreaView>
